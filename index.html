@@ -498,18 +498,68 @@ Yes. Your AI assistant can respond to customers day and night without breaks.
 Ready to Transform Your Customer Support?
 </h2>
 
-<p style="color:#cbd5e1;font-size:18px;">
+<p style="color:#cbd5e1;font-size:18px;max-width:700px;margin:20px auto;">
 Start using SmartReply AI today and let artificial intelligence handle your WhatsApp conversations while you focus on growing your business.
 </p>
 
-<a href="mailto:smartreplyaisupport@gmail.com">
 <button>
 Get Started Today
 </button>
-</a>
 
 </section>
 
+<section class="waitlist-section" id="waitlist">
+
+<h2>Join the SmartReply AI Waitlist</h2>
+
+<p style="color:#cbd5e1;">
+Be the first to know when SmartReply AI launches. Join the waitlist and we'll notify you as soon as we're live.
+</p>
+
+<form id="waitlist-form" class="waitlist-form">
+
+<input
+type="text"
+id="business_name"
+name="business_name"
+placeholder="Business Name"
+required>
+
+<input
+type="text"
+id="contact_name"
+name="contact_name"
+placeholder="Contact Name"
+required>
+
+<input
+type="email"
+id="email"
+name="email"
+placeholder="Email Address"
+required>
+
+<input
+type="tel"
+id="phone"
+name="phone"
+placeholder="Phone Number">
+
+<textarea
+id="message"
+name="message"
+rows="4"
+placeholder="Tell us about your business"></textarea>
+
+<button type="submit" id="waitlist-submit">
+Join Waitlist
+</button>
+
+<p id="waitlist-status"></p>
+
+</form>
+
+</section>
 
 <footer id="contact" style="padding:50px 8%;background:#020617;">
 
@@ -531,11 +581,11 @@ AI-powered WhatsApp automation for modern businesses.
 
 <p><a href="#features" style="color:#94a3b8;text-decoration:none;">Features</a></p>
 
+<p><a href="#how-it-works" style="color:#94a3b8;text-decoration:none;">How It Works</a></p>
+
 <p><a href="#pricing" style="color:#94a3b8;text-decoration:none;">Pricing</a></p>
 
 <p><a href="#faq" style="color:#94a3b8;text-decoration:none;">FAQ</a></p>
-
-<p><a href="#contact" style="color:#94a3b8;text-decoration:none;">Contact</a></p>
 
 </div>
 
@@ -544,9 +594,8 @@ AI-powered WhatsApp automation for modern businesses.
 <h3>Connect</h3>
 
 <p>
-📧
 <a href="mailto:smartreplyaisupport@gmail.com" style="color:#94a3b8;text-decoration:none;">
-smartreplyaisupport@gmail.com
+📧 smartreplyaisupport@gmail.com
 </a>
 </p>
 
@@ -564,30 +613,6 @@ smartreplyaisupport@gmail.com
 
 </footer>
 
-</div>
-
-<div>
-
-<h3>Connect</h3>
-
-<p>Email: smartreplyaisupport@gmail.com</p>
-<p>WhatsApp Automation</p>
-
-</div>
-
-</div>
-
-<p style="
-text-align:center;
-margin-top:40px;
-color:#94a3b8;">
-
-© 2026 SmartReply AI. All rights reserved.
-
-</p>
-
-</footer>
-
 <script>
 (function () {
 const form = document.getElementById("waitlist-form");
@@ -596,8 +621,12 @@ const submitBtn = document.getElementById("waitlist-submit");
 
 const WEBHOOK_URL = "https://pelumi5252.app.n8n.cloud/webhook/website-waitlist";
 
-form.addEventListener("submit", async function (e) {
+form.addEventListener("submit", async function(e){
 e.preventDefault();
+
+submitBtn.disabled = true;
+status.textContent = "Submitting...";
+status.style.color = "#38bdf8";
 
 const payload = {
 business_name: form.business_name.value.trim(),
@@ -607,30 +636,25 @@ phone: form.phone.value.trim(),
 message: form.message.value.trim()
 };
 
-submitBtn.disabled = true;
-status.textContent = "Submitting...";
-
-try {
-
-const response = await fetch(WEBHOOK_URL, {
-method: "POST",
-headers: {
-"Content-Type": "application/json"
+try{
+const response = await fetch(WEBHOOK_URL,{
+method:"POST",
+headers:{
+"Content-Type":"application/json"
 },
-body: JSON.stringify(payload)
+body:JSON.stringify(payload)
 });
 
 const data = await response.json();
 
 status.style.color = "#22c55e";
-status.textContent = data.message || "Thank you for joining the waitlist!";
-
+status.textContent = data.message || "Thank you for joining the SmartReply AI waitlist!";
 form.reset();
 
-} catch (err) {
+}catch(error){
 
 status.style.color = "#ef4444";
-status.textContent = "Submission failed. Please try again.";
+status.textContent = "Something went wrong. Please try again.";
 
 }
 
