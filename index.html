@@ -162,7 +162,44 @@ section h2{
 }
 
 }
+.waitlist-section{
+padding:80px 8%;
+background:#020617;
+text-align:center;
+}
 
+.waitlist-form{
+max-width:700px;
+margin:40px auto;
+display:flex;
+flex-direction:column;
+gap:18px;
+}
+
+.waitlist-form input,
+.waitlist-form textarea{
+padding:15px;
+border-radius:10px;
+border:1px solid #334155;
+background:#111827;
+color:#fff;
+font-size:16px;
+outline:none;
+}
+
+.waitlist-form input:focus,
+.waitlist-form textarea:focus{
+border-color:#38bdf8;
+}
+
+.waitlist-form button{
+margin-top:10px;
+}
+
+#waitlist-status{
+margin-top:15px;
+font-weight:bold;
+}
 </style>
 
 </head>
@@ -578,12 +615,166 @@ Thank you! We'll contact you soon.
 </div>
 
 </section>
-<p style="text-align:center;color:#94a3b8;">
+
+<section class="waitlist-section" id="waitlist">
+
+<h2>Join the SmartReply AI Waitlist</h2>
+
+<p style="color:#cbd5e1;">
+Be the first to know when SmartReply AI launches.
+</p>
+
+<form id="waitlist-form" class="waitlist-form">
+
+<input
+type="text"
+id="business_name"
+name="business_name"
+placeholder="Business Name"
+required>
+
+<input
+type="text"
+id="contact_name"
+name="contact_name"
+placeholder="Contact Name"
+required>
+
+<input
+type="email"
+id="email"
+name="email"
+placeholder="Email Address"
+required>
+
+<input
+type="tel"
+id="phone"
+name="phone"
+placeholder="Phone Number">
+
+<textarea
+id="message"
+name="message"
+rows="4"
+placeholder="Tell us about your business"></textarea>
+
+<button type="submit" id="waitlist-submit">
+Join Waitlist
+</button>
+
+<p id="waitlist-status"></p>
+
+</form>
+
+</section>
+
+<footer id="contact"
+style="
+padding:50px 8%;
+background:#020617;">
+
+<div style="
+display:flex;
+justify-content:space-between;
+flex-wrap:wrap;
+gap:30px;">
+
+<div>
+
+<h2 style="color:#38bdf8;">
+SmartReply AI
+</h2>
+
+<p style="color:#94a3b8;">
+AI-powered WhatsApp automation for modern businesses.
+</p>
+
+</div>
+
+<div>
+
+<h3>Company</h3>
+
+<p>Features</p>
+<p>Pricing</p>
+<p>Contact</p>
+
+</div>
+
+<div>
+
+<h3>Connect</h3>
+
+<p>Email: smartreplyaisupport@gmail.com</p>
+<p>WhatsApp Automation</p>
+
+</div>
+
+</div>
+
+<p style="
+text-align:center;
+margin-top:40px;
+color:#94a3b8;">
+
 © 2026 SmartReply AI. All rights reserved.
+
 </p>
 
 </footer>
 
-</body>
+<script>
+(function () {
+const form = document.getElementById("waitlist-form");
+const status = document.getElementById("waitlist-status");
+const submitBtn = document.getElementById("waitlist-submit");
 
+const WEBHOOK_URL = "https://pelumi5252.app.n8n.cloud/webhook/website-waitlist";
+
+form.addEventListener("submit", async function (e) {
+e.preventDefault();
+
+const payload = {
+business_name: form.business_name.value.trim(),
+contact_name: form.contact_name.value.trim(),
+email: form.email.value.trim(),
+phone: form.phone.value.trim(),
+message: form.message.value.trim()
+};
+
+submitBtn.disabled = true;
+status.textContent = "Submitting...";
+
+try {
+
+const response = await fetch(WEBHOOK_URL, {
+method: "POST",
+headers: {
+"Content-Type": "application/json"
+},
+body: JSON.stringify(payload)
+});
+
+const data = await response.json();
+
+status.style.color = "#22c55e";
+status.textContent = data.message || "Thank you for joining the waitlist!";
+
+form.reset();
+
+} catch (err) {
+
+status.style.color = "#ef4444";
+status.textContent = "Submission failed. Please try again.";
+
+}
+
+submitBtn.disabled = false;
+
+});
+})();
+</script>
+
+</body>
 </html>
