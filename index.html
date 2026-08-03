@@ -1,1626 +1,534 @@
 
 <!DOCTYPE html>
-
 <html lang="en">
 
 <head>
-
 <meta charset="UTF-8">
-
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-
 
 <title>SmartReply AI - WhatsApp AI Assistant</title>
 
-
-
 <style>
 
-
-
-* {
-
-  box-sizing: border-box;
-
-  scroll-behavior: smooth;
-
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    scroll-behavior:smooth;
 }
 
-
-
-body {
-
-  margin: 0;
-
-  font-family: Arial, sans-serif;
-
-  background: #020617;
-
-  color: white;
-
+body{
+    font-family:Arial,sans-serif;
+    background:#020617;
+    color:#fff;
+    line-height:1.6;
 }
 
-
-
-
-
-nav {
-
-  display: flex;
-
-  justify-content: space-between;
-
-  align-items: center;
-
-  padding: 20px 8%;
-
-  background: #020617;
-
-  position: sticky;
-
-  top: 0;
-
-  z-index: 100;
-
+nav{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:20px 8%;
+    background:#020617;
+    position:sticky;
+    top:0;
+    z-index:1000;
+    border-bottom:1px solid rgba(255,255,255,.08);
 }
 
-
-
-
-
-.logo {
-
-  font-size: 26px;
-
-  font-weight: bold;
-
-  color: #38bdf8;
-
+.logo{
+    font-size:28px;
+    font-weight:bold;
+    color:#38bdf8;
+    text-decoration:none;
 }
 
-
-
-
-
-nav a {
-
-  color: white;
-
-  text-decoration: none;
-
-  margin-left: 25px;
-
-  transition: 0.3s;
-
+nav div{
+    display:flex;
+    gap:25px;
 }
 
-
-
-
-
-nav a:hover {
-
-  color: #38bdf8;
-
+nav a{
+    color:#fff;
+    text-decoration:none;
+    transition:.3s;
 }
 
-
-
-
-
-
-
-.hero {
-
-
-
-text-align:center;
-
-padding:120px 8%;
-
-
-
-background:
-
-radial-gradient(circle at top,#0f172a,#020617);
-
-
-
+nav a:hover{
+    color:#38bdf8;
 }
 
-
-
-
-
-.hero h1 {
-
-
-
-font-size:52px;
-
-line-height:1.2;
-
-margin-bottom:25px;
-
-
-
+.hero{
+    text-align:center;
+    padding:120px 8%;
+    background:radial-gradient(circle at top,#0f172a,#020617);
 }
 
-
-
-
-
-.hero span {
-
-
-
-color:#38bdf8;
-
-
-
+.hero h1{
+    font-size:54px;
+    margin-bottom:25px;
+    line-height:1.2;
 }
 
-
-
-
-
-.hero p {
-
-
-
-font-size:21px;
-
-color:#cbd5e1;
-
-max-width:700px;
-
-margin:auto;
-
-
-
+.hero span{
+    color:#38bdf8;
 }
 
-
-
-
-
-
-
-button {
-
-
-
-margin-top:30px;
-
-padding:15px 30px;
-
-border:none;
-
-border-radius:10px;
-
-
-
-background:
-
-linear-gradient(135deg,#38bdf8,#22c55e);
-
-
-
-color:white;
-
-
-
-font-size:16px;
-
-font-weight:bold;
-
-
-
-cursor:pointer;
-
-
-
-transition:0.3s;
-
-
-
-box-shadow:
-
-0 0 20px rgba(56,189,248,0.3);
-
-
-
+.hero p{
+    max-width:700px;
+    margin:auto;
+    color:#cbd5e1;
+    font-size:20px;
 }
 
-
-
-
-
-button:hover {
-
-
-
-transform:translateY(-5px);
-
-
-
-box-shadow:
-
-0 0 35px rgba(56,189,248,0.6);
-
-
-
+button{
+    margin-top:35px;
+    padding:15px 32px;
+    border:none;
+    border-radius:10px;
+    cursor:pointer;
+    color:#fff;
+    font-size:16px;
+    font-weight:bold;
+    transition:.3s;
+    background:linear-gradient(135deg,#38bdf8,#22c55e);
+    box-shadow:0 0 20px rgba(56,189,248,.3);
 }
 
-
-
-
-
-
-
-.secondary-btn {
-
-
-
-background:#111827;
-
-
-
-border:1px solid #38bdf8;
-
-
-
-margin-left:10px;
-
-
-
+button:hover{
+    transform:translateY(-5px);
+    box-shadow:0 0 35px rgba(56,189,248,.6);
 }
 
-
-
-
-
-
-
-.card {
-
-
-
-transition:0.3s;
-
-
-
+.secondary-btn{
+    background:#111827;
+    border:1px solid #38bdf8;
+    margin-left:10px;
 }
 
-
-
-
-
-.card:hover {
-
-
-
-transform:translateY(-10px);
-
-
-
-box-shadow:
-
-0 20px 40px rgba(0,0,0,0.5);
-
-
-
+.card{
+    transition:.3s;
 }
 
-
-
-
-
-
-
-.feature-title {
-
-
-
-font-size:36px;
-
-
-
+.card:hover{
+    transform:translateY(-10px);
+    box-shadow:0 20px 40px rgba(0,0,0,.45);
 }
 
+section{
+    scroll-margin-top:90px;
+}
 
-
-
-
-
+.feature-title{
+    font-size:36px;
+}
 
 @media(max-width:768px){
 
-
-
-
-
-nav {
-
-
-
-flex-direction:column;
-
-gap:15px;
-
-text-align:center;
-
-
-
+nav{
+    flex-direction:column;
+    gap:15px;
 }
 
-
-
-
-
-nav a {
-
-
-
-display:block;
-
-margin:10px 0;
-
-
-
+nav div{
+    flex-direction:column;
+    gap:10px;
+    text-align:center;
 }
 
-
-
-
-
-.hero {
-
-
-
-padding:80px 5%;
-
-
-
+.hero{
+    padding:80px 5%;
 }
 
-
-
-
-
-.hero h1 {
-
-
-
-font-size:36px;
-
-
-
+.hero h1{
+    font-size:38px;
 }
 
-
-
-
-
-.hero p {
-
-
-
-font-size:17px;
-
-
-
+.hero p{
+    font-size:17px;
 }
 
-
-
-
-
-button {
-
-
-
-width:90%;
-
-max-width:320px;
-
-
-
+button{
+    width:90%;
+    max-width:320px;
 }
 
-
-
-
-
-.secondary-btn {
-
-
-
-margin-left:0;
-
-
-
+.secondary-btn{
+    margin-left:0;
 }
 
-
-
-
-
-section h2 {
-
-
-
-font-size:28px!important;
-
-
-
+section h2{
+    font-size:28px!important;
 }
 
-
-
-
-
 }
-
-
-
-
 
 </style>
 
-
-
 </head>
-
-
-
-
 
 <body>
 
-
-
-
-
 <nav>
 
-
-
-<div class="logo">
-
-SmartReply AI
-
-</div>
-
-
-
-
+<a href="#" class="logo">SmartReply AI</a>
 
 <div>
 
-
-
-<a href="#features">
-
-Features
-
-</a>
-
-
-
-<a href="#pricing">
-
-Pricing
-
-</a>
-
-
-
-<a href="#contact">
-
-Contact
-
-</a>
-
-
+<a href="#features">Features</a>
+<a href="#how-it-works">How It Works</a>
+<a href="#trust">Why Us</a>
+<a href="#pricing">Pricing</a>
+<a href="#faq">FAQ</a>
+<a href="#contact">Contact</a>
 
 </div>
-
-
 
 </nav>
 
-
-
-
-
-
-
 <section class="hero">
 
-
-
-
-
 <h1>
-
-Automate Your WhatsApp Conversations With 
-
+Automate Your WhatsApp Conversations With
 <span>AI</span>
-
 </h1>
 
-
-
-
-
 <p>
-
 SmartReply AI helps businesses reply faster, support customers 24/7, and turn conversations into growth.
-
 </p>
-
-
-
-
 
 <div>
 
+<a href="mailto:smartreplyaisupport@gmail.com">
+<button>Get Started</button>
+</a>
 
-
-<button>
-
-Get Started
-
-</button>
-
-
-
-
-
-<button class="secondary-btn">
-
-Learn More
-
-</button>
-
-
-
-
+<a href="#features">
+<button class="secondary-btn">Learn More</button>
+</a>
 
 </div>
 
-
-
-
-
 </section>
 
+<section id="features" style="padding:80px 8%;text-align:center;background:#111827;">
 
-
-
-
-
-
-<section id="features" 
-
-style="padding:80px 8%; text-align:center; background:#111827;">
-
-
-
-
-
-<h2 class="feature-title">
-
-Powerful AI Features
-
-</h2>
-
-
-
-
+<h2 class="feature-title">Powerful AI Features</h2>
 
 <p style="color:#cbd5e1;">
-
 Everything your business needs to automate customer conversations.
-
 </p>
 
+<div style="display:flex;gap:25px;justify-content:center;flex-wrap:wrap;margin-top:40px;">
 
+<div class="card" style="background:#020617;padding:30px;border-radius:15px;width:250px;">
 
-
-
-
-
-<div style="
-
-display:flex;
-
-gap:25px;
-
-justify-content:center;
-
-flex-wrap:wrap;
-
-margin-top:40px;">
-
-
-
-
-
-
-
-<div class="card"
-
-style="
-
-background:#020617;
-
-padding:30px;
-
-border-radius:15px;
-
-width:250px;">
-
-
-
-
-
-<h3>
-
-💬 Smart Conversations
-
-</h3>
-
-
-
-
+<h3>💬 Smart Conversations</h3>
 
 <p>
-
-AI replies to customers instantly and keeps conversations natural.
-
+AI replies instantly while maintaining natural, human-like conversations.
 </p>
-
-
-
-
 
 </div>
 
+<div class="card" style="background:#020617;padding:30px;border-radius:15px;width:250px;">
 
-
-
-
-
-
-<div class="card"
-
-style="
-
-background:#020617;
-
-padding:30px;
-
-border-radius:15px;
-
-width:250px;">
-
-
-
-
-
-<h3>
-
-📚 Business Knowledge
-
-</h3>
-
-
-
-
+<h3>📚 Business Knowledge</h3>
 
 <p>
-
-Train AI with your business information, products, and documents.
-
+Train SmartReply AI using your documents, FAQs, products and services.
 </p>
-
-
-
-
 
 </div>
 
+<div class="card" style="background:#020617;padding:30px;border-radius:15px;width:250px;">
 
-
-
-
-
-
-<div class="card"
-
-style="
-
-background:#020617;
-
-padding:30px;
-
-border-radius:15px;
-
-width:250px;">
-
-
-
-
-
-<h3>
-
-🎙️ Voice & Image AI
-
-</h3>
-
-
-
-
+<h3>🎙️ Voice & Image AI</h3>
 
 <p>
-
-Understand customer voice notes and images automatically.
-
+Automatically understand customer voice notes, photos and media.
 </p>
 
-
-
-
-
 </div>
 
-
-
-
-
 </div>
-
-
-
-
 
 </section>
 
+<section id="how-it-works" style="padding:80px 8%;text-align:center;">
 
-
-<section style="padding:80px 8%; text-align:center;">
-
-
-
-
-
-<h2 style="font-size:36px;">
-
-How SmartReply AI Works
-
-</h2>
-
-
-
-
+<h2 style="font-size:36px;">How SmartReply AI Works</h2>
 
 <p style="color:#cbd5e1;">
-
 Three simple steps to automate your customer conversations.
-
 </p>
 
+<div style="display:flex;gap:25px;justify-content:center;flex-wrap:wrap;margin-top:40px;">
 
+<div class="card" style="background:#111827;padding:30px;border-radius:15px;width:250px;">
 
-
-
-
-
-<div style="
-
-display:flex;
-
-gap:25px;
-
-justify-content:center;
-
-flex-wrap:wrap;
-
-margin-top:40px;">
-
-
-
-
-
-
-
-<div class="card"
-
-style="
-
-background:#111827;
-
-padding:30px;
-
-border-radius:15px;
-
-width:250px;">
-
-
-
-
-
-<h3>
-
-1. Connect WhatsApp
-
-</h3>
-
-
-
-
+<h3>1. Connect WhatsApp</h3>
 
 <p>
-
-Connect your business WhatsApp and let SmartReply AI handle conversations automatically.
-
+Connect your WhatsApp Business account in minutes.
 </p>
-
-
-
-
 
 </div>
 
+<div class="card" style="background:#111827;padding:30px;border-radius:15px;width:250px;">
 
-
-
-
-
-
-<div class="card"
-
-style="
-
-background:#111827;
-
-padding:30px;
-
-border-radius:15px;
-
-width:250px;">
-
-
-
-
-
-<h3>
-
-2. Add Knowledge
-
-</h3>
-
-
-
-
+<h3>2. Add Your Knowledge</h3>
 
 <p>
-
-Upload your business information so AI understands your products and services.
-
+Upload your business information, FAQs, products, services and documents so SmartReply AI answers accurately.
 </p>
-
-
-
-
 
 </div>
 
+<div class="card" style="background:#111827;padding:30px;border-radius:15px;width:250px;">
 
-
-
-
-
-
-<div class="card"
-
-style="
-
-background:#111827;
-
-padding:30px;
-
-border-radius:15px;
-
-width:250px;">
-
-
-
-
-
-<h3>
-
-3. Automate Growth
-
-</h3>
-
-
-
-
+<h3>3. Automate Growth</h3>
 
 <p>
-
-Respond instantly, support customers, and save valuable time.
-
+Reply instantly, reduce workload, delight customers and grow your business 24/7.
 </p>
 
-
-
-
-
 </div>
 
-
-
-
-
-
-
 </div>
-
-
-
-
 
 </section>
 
 
+<section id="trust" style="padding:80px 8%;background:#111827;text-align:center;">
+
+<h2 style="font-size:36px;">Why Businesses Trust SmartReply AI</h2>
+
+<p style="color:#cbd5e1;max-width:750px;margin:20px auto;">
+Built for modern businesses that want faster replies, happier customers and less manual work.
+</p>
+
+<div style="display:flex;flex-wrap:wrap;gap:25px;justify-content:center;margin-top:40px;">
+
+<div class="card" style="background:#020617;padding:30px;border-radius:15px;width:250px;">
+<h3>⚡ Fast Responses</h3>
+<p>Reply to customers within seconds, day or night.</p>
+</div>
+
+<div class="card" style="background:#020617;padding:30px;border-radius:15px;width:250px;">
+<h3>🔒 Secure</h3>
+<p>Your business knowledge stays private and is used only for your assistant.</p>
+</div>
+
+<div class="card" style="background:#020617;padding:30px;border-radius:15px;width:250px;">
+<h3>🤖 AI Powered</h3>
+<p>Powered by advanced AI to deliver natural, intelligent conversations.</p>
+</div>
+
+<div class="card" style="background:#020617;padding:30px;border-radius:15px;width:250px;">
+<h3>📈 Business Growth</h3>
+<p>Convert more conversations into satisfied customers and sales.</p>
+</div>
+
+</div>
+
+</section>
 
 
+<section id="pricing" style="padding:80px 8%;text-align:center;background:#020617;">
 
-
-
-
-
-
-
-<section id="pricing"
-
-style="
-
-padding:80px 8%;
-
-text-align:center;
-
-background:#111827;">
-
-
-
-
-
-
-
-<h2 style="font-size:36px;">
-
-Simple Pricing
-
-</h2>
-
-
-
-
+<h2 style="font-size:36px;">Simple Pricing</h2>
 
 <p style="color:#cbd5e1;">
-
-Choose a plan that fits your business needs.
-
+Choose a plan that fits your business.
 </p>
 
+<div style="display:flex;gap:25px;justify-content:center;flex-wrap:wrap;margin-top:40px;">
 
+<div class="card" style="background:#111827;padding:35px;border-radius:15px;width:270px;">
 
+<h3>Starter</h3>
 
-
-
-
-
-
-<div style="
-
-display:flex;
-
-gap:25px;
-
-justify-content:center;
-
-flex-wrap:wrap;
-
-margin-top:40px;">
-
-
-
-
-
-
-
-
-
-
-
-<div class="card"
-
-style="
-
-background:#020617;
-
-padding:35px;
-
-border-radius:15px;
-
-width:270px;">
-
-
-
-
-
-<h3>
-
-Starter
-
-</h3>
-
-
-
-
-
-<h2>
-
-Free
-
-</h2>
-
-
-
-
+<h2>Free</h2>
 
 <p>
-
 Perfect for testing SmartReply AI.
-
 </p>
 
-
-
-
-
-<button>
-
-Get Started
-
-</button>
-
-
-
-
+<a href="mailto:smartreplyaisupport@gmail.com">
+<button>Get Started</button>
+</a>
 
 </div>
 
+<div class="card" style="background:#111827;padding:35px;border-radius:15px;width:270px;border:1px solid #38bdf8;">
 
+<h3>Business</h3>
 
-
-
-
-
-
-
-
-
-<div class="card"
-
-style="
-
-background:#020617;
-
-padding:35px;
-
-border-radius:15px;
-
-width:270px;
-
-border:1px solid #38bdf8;">
-
-
-
-
-
-<h3>
-
-Business
-
-</h3>
-
-
-
-
-
-<h2>
-
-Coming Soon
-
-</h2>
-
-
-
-
+<h2>Coming Soon</h2>
 
 <p>
-
-Advanced AI automation for growing businesses.
-
+Advanced automation for growing businesses.
 </p>
 
-
-
-
-
-<button>
-
-Choose Plan
-
-</button>
-
-
-
-
+<a href="mailto:smartreplyaisupport@gmail.com">
+<button>Join Waitlist</button>
+</a>
 
 </div>
 
+<div class="card" style="background:#111827;padding:35px;border-radius:15px;width:270px;">
 
+<h3>Enterprise</h3>
 
-
-
-
-
-
-
-
-
-<div class="card"
-
-style="
-
-background:#020617;
-
-padding:35px;
-
-border-radius:15px;
-
-width:270px;">
-
-
-
-
-
-<h3>
-
-Enterprise
-
-</h3>
-
-
-
-
-
-<h2>
-
-Custom
-
-</h2>
-
-
-
-
+<h2>Custom</h2>
 
 <p>
-
-Powerful solutions for larger teams.
-
+Custom AI solutions for large organizations.
 </p>
 
-
-
-
-
-<button>
-
-Contact Us
-
-</button>
-
-
-
-
+<a href="mailto:smartreplyaisupport@gmail.com">
+<button>Contact Sales</button>
+</a>
 
 </div>
 
-
-
-
-
-
-
 </div>
-
-
-
-
 
 </section>
 
 
+<section id="faq" style="padding:80px 8%;">
 
-
-
-
-
-
-
-
-
-<section style="padding:80px 8%;">
-
-
-
-
-
-
-
-<h2 style="
-
-font-size:36px;
-
-text-align:center;">
-
+<h2 style="font-size:36px;text-align:center;">
 Frequently Asked Questions
-
 </h2>
 
-
-
-
-
-
-
-<p style="
-
-color:#cbd5e1;
-
-text-align:center;">
-
+<p style="color:#cbd5e1;text-align:center;">
 Everything you need to know about SmartReply AI.
-
 </p>
 
+<div style="max-width:800px;margin:40px auto;">
 
+<div class="card" style="background:#111827;padding:25px;border-radius:15px;margin-bottom:20px;">
 
-
-
-
-
-
-
-
-
-<div style="
-
-max-width:800px;
-
-margin:40px auto;">
-
-
-
-
-
-
-
-
-
-
-
-<div class="card"
-
-style="
-
-background:#111827;
-
-padding:25px;
-
-border-radius:15px;
-
-margin-bottom:20px;">
-
-
-
-
-
-<h3>
-
-What is SmartReply AI?
-
-</h3>
-
-
-
-
+<h3>What is SmartReply AI?</h3>
 
 <p>
-
-SmartReply AI is a WhatsApp AI assistant that helps businesses automate customer conversations and provide faster support.
-
+SmartReply AI is an AI-powered WhatsApp assistant that automates customer conversations, answers questions, and provides instant support.
 </p>
-
-
-
-
 
 </div>
 
+<div class="card" style="background:#111827;padding:25px;border-radius:15px;margin-bottom:20px;">
 
-
-
-
-
-
-
-
-
-
-<div class="card"
-
-style="
-
-background:#111827;
-
-padding:25px;
-
-border-radius:15px;
-
-margin-bottom:20px;">
-
-
-
-
-
-<h3>
-
-Does SmartReply AI work with WhatsApp?
-
-</h3>
-
-
-
-
+<h3>Does it work with WhatsApp Business?</h3>
 
 <p>
-
-Yes. SmartReply AI helps businesses manage WhatsApp customer interactions using artificial intelligence.
-
+Yes. SmartReply AI integrates with WhatsApp Business so businesses can automate customer communication.
 </p>
-
-
-
-
 
 </div>
 
+<div class="card" style="background:#111827;padding:25px;border-radius:15px;margin-bottom:20px;">
 
-
-
-
-
-
-
-
-
-
-<div class="card"
-
-style="
-
-background:#111827;
-
-padding:25px;
-
-border-radius:15px;
-
-margin-bottom:20px;">
-
-
-
-
-
-<h3>
-
-Can I train the AI with my business information?
-
-</h3>
-
-
-
-
+<h3>Can I train it with my business information?</h3>
 
 <p>
-
-Yes. Businesses can provide information and documents so the AI gives accurate responses.
-
+Absolutely. Upload documents, FAQs, products and services so your AI gives accurate responses.
 </p>
 
+</div>
 
+<div class="card" style="background:#111827;padding:25px;border-radius:15px;margin-bottom:20px;">
 
+<h3>Is SmartReply AI available 24/7?</h3>
 
+<p>
+Yes. Your AI assistant can respond to customers day and night without breaks.
+</p>
 
 </div>
 
-
-
-
-
-
-
-
-
 </div>
-
-
-
-
 
 </section>
-<section style="
-padding:80px 8%;
-text-align:center;
-background:#111827;">
 
+
+<section style="padding:80px 8%;text-align:center;background:#111827;">
 
 <h2 style="font-size:36px;">
 Ready to Transform Your Customer Support?
 </h2>
 
-
-<p style="
-color:#cbd5e1;
-font-size:18px;">
-Start using SmartReply AI and let artificial intelligence handle your WhatsApp conversations.
+<p style="color:#cbd5e1;font-size:18px;">
+Start using SmartReply AI today and let artificial intelligence handle your WhatsApp conversations while you focus on growing your business.
 </p>
 
-
+<a href="mailto:smartreplyaisupport@gmail.com">
 <button>
 Get Started Today
 </button>
-
+</a>
 
 </section>
 
 
+<footer id="contact" style="padding:50px 8%;background:#020617;">
 
-
-
-<footer id="contact"
-style="
-padding:50px 8%;
-background:#020617;">
-
-
-
-<div style="
-display:flex;
-justify-content:space-between;
-flex-wrap:wrap;
-gap:30px;">
-
-
-
-
+<div style="display:flex;justify-content:space-between;flex-wrap:wrap;gap:30px;">
 
 <div>
 
-
-<h2 style="
-color:#38bdf8;">
+<h2 style="color:#38bdf8;">
 SmartReply AI
 </h2>
 
-
-<p style="
-color:#94a3b8;">
+<p style="color:#94a3b8;">
 AI-powered WhatsApp automation for modern businesses.
 </p>
 
-
 </div>
-
-
-
-
 
 <div>
 
+<h3>Company</h3>
 
-<h3>
-Company
-</h3>
+<p><a href="#features" style="color:#94a3b8;text-decoration:none;">Features</a></p>
 
+<p><a href="#pricing" style="color:#94a3b8;text-decoration:none;">Pricing</a></p>
 
-<p>
-Features
-</p>
+<p><a href="#faq" style="color:#94a3b8;text-decoration:none;">FAQ</a></p>
 
-
-<p>
-Pricing
-</p>
-
-
-<p>
-Contact
-</p>
-
+<p><a href="#contact" style="color:#94a3b8;text-decoration:none;">Contact</a></p>
 
 </div>
-
-
-
-
 
 <div>
 
-
-<h3>
-Connect
-</h3>
-
+<h3>Connect</h3>
 
 <p>
-Email: support@smartreply.ai
+📧
+<a href="mailto:smartreplyaisupport@gmail.com" style="color:#94a3b8;text-decoration:none;">
+smartreplyaisupport@gmail.com
+</a>
 </p>
 
+<p>WhatsApp AI Automation</p>
 
-<p>
-WhatsApp Automation
-</p>
-
+<p>Available Worldwide</p>
 
 </div>
 
-
-
-
-
 </div>
+<hr style="margin:40px 0;border:none;border-top:1px solid rgba(255,255,255,.08);">
 
-
-
-
-
-<p style="
-text-align:center;
-margin-top:40px;
-color:#94a3b8;">
-
-
+<p style="text-align:center;color:#94a3b8;">
 © 2026 SmartReply AI. All rights reserved.
-
-
 </p>
-
-
-
 
 </footer>
-
-
 
 </body>
 
